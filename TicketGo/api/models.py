@@ -21,8 +21,14 @@ class Category(models.Model):
 
 
 class Booking(models.Model):
+    class PlaceType(models.TextChoices):
+        ECONOMY = 'ECO', 'Economy'
+        STANDARD = 'STD', 'Standard'
+        LUXURY = 'LUX', 'Luxury'
+        PRESIDENT = 'PRS', 'President'
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     transport = models.ForeignKey(Transport, on_delete=models.CASCADE)
+    type_place = models.CharField(max_length=3, choices=PlaceType.choices)
 
     def __str__(self):
         return self.user, self.transport
