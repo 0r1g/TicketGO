@@ -1,34 +1,73 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 
-# Create your models here.
+
+class Bus(models.Model):
+    class WiFiChoice(models.TextChoices):
+        NO = 'No', 'Not Available'
+        YES = 'Yes', 'Available'
+
+    class Socket(models.TextChoices):
+        NO = 'No', 'Not Available'
+        YES = 'Yes', 'Available'
+
+    company_name = models.ForeignKey('CompanyName', on_delete=models.CASCADE)
+    from_location = models.CharField(max_length=100)
+    to_location = models.CharField(max_length=100)
+    departure_time = models.DateTimeField()
+    arrival_time = models.DateTimeField(null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    available_seats = models.PositiveIntegerField()
+    wi_fi_availability = models.CharField(max_length=3, choices=WiFiChoice.choices)
+    socket_availability = models.CharField(max_length=3, choices=Socket.choices)
+
+    class Meta:
+        verbose_name_plural = 'Buses'
+
+    def trip_duration(self):
+        return self.arrival_time - self.departure_time
+
+    def __str__(self):
+        return f'{self.company_name}, {self.from_location} -> {self.to_location}'
 
 
-class Transport(models.Model):
+class CompanyName(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    official_name = models.CharField(max_length=100)
+    registered_address = models.TextField()
+    company_registration_number = models.PositiveIntegerField()
+
+    class Meta:
+        verbose_name_plural = 'Company Names'
 
     def __str__(self):
         return self.name
 
 
-class Category(models.Model):
-    transport_category = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.transport_category
-
-
 class Booking(models.Model):
-    class PlaceType(models.TextChoices):
-        ECONOMY = 'ECO', 'Economy'
-        STANDARD = 'STD', 'Standard'
-        LUXURY = 'LUX', 'Luxury'
-        PRESIDENT = 'PRS', 'President'
+    class SeatChoice(models.TextChoices):
+        ECK = 'EC', 'Economy Class'
+        LK = 'LK', 'Luxury Class'
+        BK = 'BK', 'Business Class'
+        VIP = 'VP', 'VIP Class'
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    transport = models.ForeignKey(Transport, on_delete=models.CASCADE)
-    type_place = models.CharField(max_length=3, choices=PlaceType.choices)
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    seat_choice = models.CharField(max_length=2, choices=SeatChoice.choices)
+    email = models.EmailField(max_length=100)
+    phone_number = models.CharField(
+        max_length=20,
+        validators=[
+            RegexValidator(
+                regex=r'^\+?1?\d{9,15}$',
+                message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+            )
+        ]
+    )
+
+    class Meta:
+        verbose_name_plural = 'Booking'
 
     def __str__(self):
-        return self.user, self.transport
+        return f'{self.user}, {self.bus}'

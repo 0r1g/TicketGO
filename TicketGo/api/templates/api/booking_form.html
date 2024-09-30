@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Booking Form</title>
-</head>
-<body>
-    <h1>Book a Place</h1>
-    <form method="post">
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Бронювання для автобуса: {{ bus.from_location }} -> {{ bus.to_location }}</h2>
+
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+
+        <!-- Кнопка відправки -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Забронювати</button>
+        </div>
     </form>
-    <a href="{% url 'home' %}">Back to Home</a>
-</body>
-</html>
+</div>
+{% endblock %}

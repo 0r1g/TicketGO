@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% for bus in buses %}
+    <div class="row-mb-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ bus.from_location }} --> {{ bus.to_location }}</h5>
+                <p class="card-text">{{ bus.price }} $</p>
+                <p class="card-text">Рейс з {{ bus.departure_time }}</p>
+                <a href="{% url 'show_buses' bus_id=bus.id %}" class="btn btn-primary">Детальніше</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

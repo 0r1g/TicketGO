@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-</head>
-<body>
-    <h1>Booking Successful</h1>
-    <p>Your booking has been successfully processed.</p>
-    <a href="{% url 'home' %}">Go Home</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <div class="mb-4">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+        </div>
+
+        <h2 class="mb-3">Операція успішна!</h2>
+        <p class="lead">Дякуємо, ваша дія була успішно завершена.</p>
+
+        <div class="mt-4">
+            <p>Номер вашого замовлення: <strong>{{ order_number }}</strong></p>
+            <p>Дата: <strong>{{ current_date }}</strong></p>
+        </div>
+
+        <div class="mt-5">
+            <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Повернутися на головну</a>
+            <a href="{% url 'view_booking' booking_id=booking.id %}" class="btn btn-outline-secondary btn-lg">Переглянути замовлення</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

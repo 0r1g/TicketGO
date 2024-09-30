@@ -1,10 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img style="height:400px" src="https://topolocfrt.com/wp-content/uploads/2023/03/Bus.jpg" class="d-block w-100" alt="Slide 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Перша подорож</h5>
+                    <p>Знайдіть найкращі пропозиції для вашої подорожі.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img style="height:400px" src="https://guelph.ca/wp-content/uploads/Electricity-bus-by-Dudek-Photography.jpg" class="d-block w-100" alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Комфортні поїздки</h5>
+                    <p>Подорожуйте з комфортом та безпекою.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img style="height:400px" src="https://www.cng-mobility.ch/wp-content/uploads/2020/02/Busse_Mercedes-Benz_Citaro-G_1200x400px-1.jpg" class="d-block w-100" alt="Slide 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Найкращі маршрути</h5>
+                    <p>Обирайте зручні маршрути та плануйте свої подорожі.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Попередній</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Наступний</span>
+        </button>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://truckinsurancehq.com.au/wp-content/uploads/2024/05/bus-insurance-300x200.png" class="card-img-top" alt="Подорож 1">
+                <div class="card-body">
+                    <h5 class="card-title">Компанії перевізники</h5>
+                    <p class="card-text">Знайдіть інформацію про наших перевізників.</p>
+                    <a href="{% url 'show_companies' %}" class="btn btn-primary">Детальніше</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://www.zapigroup.com/hs-fs/hubfs/AdobeStock_195565723-min.jpeg?width=300&name=AdobeStock_195565723-min.jpeg" class="card-img-top" alt="Подорож 2">
+                <div class="card-body">
+                    <h5 class="card-title">Маршрути</h5>
+                    <p class="card-text">Оберіть найзручніші маршрути для своїх подорожей.</p>
+                    <a href="{% url 'show_buses' %}" class="btn btn-primary">Детальніше</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://lh3.googleusercontent.com/proxy/JBoz_dGfbhVLSm6QJq20ZG8SM8H5b-eLXCujhrr3yZGww2nUkN9-WbX5x0TQoKoi0SfiKOY58pQ8yl4wCQs6Z6Cv9dAGu4ag9MVIyVnibEP7MZYq" class="card-img-top" alt="Подорож 3">
+                <div class="card-body">
+                    <h5 class="card-title">Бронювання</h5>
+                    <p class="card-text">Забронюйте свій квиток прямо зараз.</p>
+                    <a href="{% url 'show_buses' %}" class="btn btn-primary">Детальніше</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 p-4 bg-light rounded">
+        <h3 class="text-center">Наші переваги</h3>
+        <div class="row text-center mt-4">
+            <div class="col-md-4">
+                <i class="bi bi-shield-check" style="font-size: 3rem; color: green;"></i>
+                <h5>Безпека</h5>
+                <p>Ми гарантуємо високий рівень безпеки для кожного пасажира.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-clock-history" style="font-size: 3rem; color: blue;"></i>
+                <h5>Час</h5>
+                <p>Ми цінуємо ваш час і забезпечуємо точність рейсів.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-cash-stack" style="font-size: 3rem; color: orange;"></i>
+                <h5>Доступні ціни</h5>
+                <p>Наші ціни завжди залишаються конкурентними та доступними.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
