@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Bus, CompanyName, Booking
+from .models import Bus, Company, Booking, ProfilePhoto
 
 # Register your models here.
 
 
-@admin.register(CompanyName)
-class CompanyNameAdmin(admin.ModelAdmin):
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'official_name', 'registered_address', 'company_registration_number')
     list_display_links = ('id', 'name')
     ordering = ['id']
@@ -20,4 +20,10 @@ class BusAdmin(admin.ModelAdmin):
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('id', 'bus', 'user', 'seat_choice', 'email', 'phone_number')
+    ordering = ['id']
+
+
+@admin.register(ProfilePhoto)
+class ProfilePhotoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'photo')
     ordering = ['id']

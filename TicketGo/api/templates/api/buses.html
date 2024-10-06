@@ -1,18 +1,88 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
+{% load widget_tweaks %}
+
 {% block content %}
 <div class="container mt-5">
-    {% for bus in buses %}
-    <div class="row-mb-4">
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title">{{ bus.from_location }} --> {{ bus.to_location }}</h5>
-                <p class="card-text">{{ bus.price }} $</p>
-                <p class="card-text">Рейс з {{ bus.departure_time }}</p>
-                <a href="{% url 'show_buses' bus_id=bus.id %}" class="btn btn-primary">Детальніше</a>
+    <div class="search-form mb-3 p-4 bg-light rounded shadow-sm">
+        <form method="get" action="">
+            {% csrf_token %}
+            <div class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    {{ form.from_location|add_class:"form-control" }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form.to_location|add_class:"form-control" }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.departure_time|add_class:"form-control" }}
+
+                </div>
+
+                <div class="col-md-1 d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Знайти</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if buses.object_list.count > 0 %}
+        {% for bus in buses.object_list %}
+        <div class="row-mb-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title ">
+                        {{ bus.from_location }}
+                        <span class="d-inline-block mx-3" style="border-bottom: 2px solid #007bff; width: 100px;"></span>
+                        {{ bus.trip_duration|format_duration }}
+                        <span class="d-inline-block mx-3" style="border-bottom: 2px solid #007bff; width: 100px;"></span>
+                        {{ bus.to_location }}
+                    </h5>
+                    <p class="card-text position-absolute top-0 end-0 m-3" style="font-weight: bold; font-size: 1.5rem;">
+                        {{ bus.price }} $
+                    </p>
+                    <p class="card-text" style="font-family: 'Arial', sans-serif; font-size: 1.1rem; color: #343a40;">
+                    Рейс з <strong style="font-weight: bold; color: #007bff;">{{ bus.departure_time|date:"H:i A" }}</strong> до <strong style="font-weight: bold; color: #007bff;">{{ bus.arrival_time|date:"H:i A" }}</strong>
+                    </p>
+                    <p class="card-text"><strong>Перевізник:</strong> <a href="{% url 'show_company_details' company_id=bus.company_name_id %}" style="color: #007bff; text-decoration: none;">{{ bus.company_name }}</a></p>
+                    <a href="{% url 'show_buses' bus_id=bus.id %}" class="btn btn-primary">Детальніше</a>
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning text-center" role="alert" style="font-size: 1.2rem;">
+            <i class="bi bi-exclamation-triangle-fill"></i> Не знайдено автобусів за вашим запитом.
+            <br> Будь ласка, спробуйте змінити параметри пошуку.
+        </div>
+    {% endif %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if buses.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ buses.previous_page_number }}{% if request.GET.from_location %}&from_location={{ request.GET.from_location }}{% endif %}{% if request.GET.to_location %}&to_location={{ request.GET.to_location }}{% endif %}{% if request.GET.departure_time %}&departure_time={{ request.GET.departure_time }}{% endif %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for p in buses.paginator.page_range %}
+            <li class="page-item {% if p == buses.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ p }}{% if request.GET.from_location %}&from_location={{ request.GET.from_location }}{% endif %}{% if request.GET.to_location %}&to_location={{ request.GET.to_location }}{% endif %}{% if request.GET.departure_time %}&departure_time={{ request.GET.departure_time }}{% endif %}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if buses.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ buses.next_page_number }}{% if request.GET.from_location %}&from_location={{ request.GET.from_location }}{% endif %}{% if request.GET.to_location %}&to_location={{ request.GET.to_location }}{% endif %}{% if request.GET.departure_time %}&departure_time={{ request.GET.departure_time }}{% endif %}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
 </div>
 {% endblock %}

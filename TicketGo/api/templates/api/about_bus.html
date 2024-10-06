@@ -1,37 +1,51 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
+
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center">Деталі поїздки</h2>
 
-    <!-- Карточка з деталями рейсу -->
     <div class="card mt-3">
         <div class="card-body">
-            <!-- Місто відправлення та прибуття -->
-            <h4 class="card-title text-center mb-3">
-                <strong>{{ bus.from_location }}</strong>
-                <i class="bi bi-arrow-right"> -></i> <!-- Стрілка для відображення напрямку -->
-                <strong>{{ bus.to_location }}</strong>
-            </h4>
 
-            <!-- Час виїзду та прибуття -->
-            <div class="d-flex justify-content-between">
-                <div>
-                    <p><strong>Виїзд:</strong> {{ bus.departure_time }}</p>
-                    <p><strong>Прибуття:</strong> {{ bus.arrival_time }}</p>
+            <h5 class="card-title text-center mb-3">
+                    {{ bus.from_location }}
+                    <span class="d-inline-block mx-3" style="border-bottom: 2px solid #007bff; width: 100px;"></span>
+                    {{ bus.trip_duration|format_duration }}
+                    <span class="d-inline-block mx-3" style="border-bottom: 2px solid #007bff; width: 100px;"></span>
+                    {{ bus.to_location }}
+            </h5>
+
+            <div class=" justify-content-between mt-3">
+                <p class="mb-1"><strong>Виїзд:</strong> <span class="text-success fw-bold">{{ bus.departure_time|date:"H:i A" }}</span></p>
+                <p class="mb-1"><strong>Прибуття:</strong> <span class="text-success fw-bold">{{ bus.arrival_time|date:"H:i A" }}</span></p>
+            </div>
+
+
+            <div class="mt-4">
+                <p><strong>Ціна:</strong> {{ bus.price }} $</p>
+                <p><strong>Перевізник:</strong><a href="{% url 'show_company_details' company_id=bus.company_name_id %}" class="text-decoration-none text-primary fw-bold"> {{ bus.company_name }}</a></p>
+                <div class="mt-4">
+                    <p>
+                        <strong>Wi-Fi:</strong>
+                        {% if bus.wi_fi_availability == "Yes" %}
+                            <span class="text-success" style="font-size: 1.5em;">&#10003;</span>
+                        {% else %}
+                            <span class="text-danger" style="font-size: 1.5em;">&#10005;</span>
+                        {% endif %}
+                    </p>
+                    <p>
+                        <strong>Розетки:</strong>
+                        {% if bus.socket_availability == "Yes" %}
+                            <span class="text-success" style="font-size: 1.5em;">&#10003;</span>
+                        {% else %}
+                            <span class="text-danger" style="font-size: 1.5em;">&#10005;</span>
+                        {% endif %}
+                    </p>
                 </div>
             </div>
 
-            <!-- Додаткова інформація -->
-            <div class="mt-4">
-                <p><strong>Тривалість поїздки:</strong> {{ bus.trip_duration }}</p>
-                <p><strong>Ціна:</strong> {{ bus.price }} $</p>
-                <p><strong>Перевізник:</strong><a href="{% url 'show_company_details' company_id=bus.company_name_id %}" class="text-decoration-none text-primary fw-bold"> {{ bus.company_name }}</a></p>
-                <p><strong>Wi-Fi:</strong> {{ bus.wi_fi_availability }}</p>
-                <p><strong>Розетки:</strong> {{ bus.socket_availability }}</p>
-            </div>
-
-            <!-- Кнопка для бронювання -->
             <div class="text-center mt-3">
                 <a href="{% url 'booking_form' bus_id=bus.id %}" class="btn btn-success">Забронювати квиток</a>
             </div>

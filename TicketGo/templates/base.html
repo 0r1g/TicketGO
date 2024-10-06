@@ -46,9 +46,27 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'show_buses' %}">Маршрути</a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="#">Бронювання</a>-->
-<!--                        </li>-->
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger me-2">Вийти</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{% url 'profile' %}">Профіль</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Увійти</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-success" href="{% url 'register' %}">Зареєструватися</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
