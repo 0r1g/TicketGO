@@ -35,7 +35,7 @@
                 {% if tickets %}
                     {% for ticket in tickets %}
                         <div class="row-mb-4">
-                            <div class="card mb-4">
+                            <div class="card mb-2 mt-2">
                                 <div class="card-body">
                                     <h5 class="card-title ">
                                         {{ ticket.bus.from_location }}
@@ -44,6 +44,9 @@
                                         <span class="d-inline-block mx-3" style="border-bottom: 2px solid #007bff; width: 100px;"></span>
                                         {{ ticket.bus.to_location }}
                                     </h5>
+                                    <div class="mt-4">
+                                        <a href="{% url 'view_booking' booking_id=ticket.id %}" class="btn btn-outline-secondary btn-lg">Переглянути замовлення</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
