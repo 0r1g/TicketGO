@@ -7,7 +7,6 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4">
-            <!-- Блок з інформацією профілю -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white text-center">
                     <h4>{{ user.username }}</h4>
@@ -19,7 +18,7 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="{{ form.photo.label }}" class="form-label">Завантажити фото</label>
+                            <label for="{{ form.photo.label }}" class="form-label"><strong>Завантажити фото</strong></label>
                             {{ form.photo|add_class:"form-control" }}
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Відправити</button>

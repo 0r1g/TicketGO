@@ -8,7 +8,7 @@ class Bus(models.Model):
         NO = 'No', 'Not Available'
         YES = 'Yes', 'Available'
 
-    company_name = models.ForeignKey('Company', on_delete=models.CASCADE)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE)
     from_location = models.CharField(max_length=100)
     to_location = models.CharField(max_length=100)
     departure_time = models.DateTimeField()
@@ -27,7 +27,7 @@ class Bus(models.Model):
         return self.arrival_time - self.departure_time
 
     def __str__(self):
-        return f'{self.company_name}, {self.from_location} -> {self.to_location}'
+        return f'{self.company}, {self.from_location} -> {self.to_location}'
 
 
 class Company(models.Model):

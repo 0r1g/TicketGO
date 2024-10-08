@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container mt-5">
+    {% if companies %}
         <div class="row">
             {% for company in companies %}
             <div class="col-md-4 mb-4">
@@ -15,5 +16,10 @@
             </div>
             {% endfor %}
         </div>
+    {% else %}
+        <div class="alert alert-warning text-center" role="alert" style="font-size: 1.2rem;">
+            <i class="bi bi-exclamation-triangle-fill"></i> На жаль немає, жодних автобусних компаній.
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

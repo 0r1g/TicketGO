@@ -13,7 +13,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Bus)
 class BusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'company_name', 'from_location', 'to_location', 'departure_time', 'arrival_time', 'price')
+    list_display = ('id', 'company', 'from_location', 'to_location', 'departure_time', 'arrival_time', 'price')
     ordering = ['id']
 
 

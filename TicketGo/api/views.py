@@ -7,7 +7,7 @@ from .forms import BookingForm, SearchBusesForm, ProfilePhotoForm
 
 
 def home(request):
-    return render(request, 'api/home.html', {'title': 'Home'})
+    return render(request, 'api/home.html', {'title': 'TicketGO'})
 
 
 def show_companies(request):
@@ -38,6 +38,7 @@ def show_buses(request):
     context = {
         'buses': buses,
         'form': form,
+        'title': 'Buses'
     }
 
     return render(request, 'api/buses.html', context)
@@ -95,6 +96,7 @@ def booking_form(request, bus_id):
     context = {
         'form': form,
         'bus': bus,
+        'title': 'Booking',
     }
     return render(request, 'api/booking_form.html', context)
 
@@ -107,6 +109,7 @@ def view_booking(request, booking_id):
 
     context = {
         'booking': booking,
+        'title': 'Your booking',
     }
 
     return render(request, 'api/view_booking.html', context)
@@ -118,8 +121,11 @@ def success(request, booking_id):
     if booking.user != request.user:
         raise Http404("Сторінка не знайдена.")
 
-    return render(request, 'api/success.html', {'booking': booking})
+    if booking.user != request.user:
+        raise Http404("Сторінка не знайдена.")
+
+    return render(request, 'api/success.html', {'booking': booking, 'title': 'Success'})
 
 
 def page_not_found(request, exception):
-    return render(request, 'api/page_not_found.html', status=404)
+    return render(request, 'api/page_not_found.html', {'title': 'Page Not Found'}, status=404)
