@@ -12,7 +12,11 @@
                     <h4>{{ user.username }}</h4>
                 </div>
                 <div class="card-body text-center">
-                    <img src="{{ photo_profile.photo.url }}" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 150px;">
+                    {% if photo_profile %}
+                        <img src="{{ photo_profile.photo.url }}" alt="photo" class="img-fluid rounded-circle mb-3" style="width: 150px;">
+                    {% else %}
+                        <img src="https://cdn-icons-png.flaticon.com/512/64/64096.png" alt="photo" class="img-fluid rounded-circle mb-3" style="width: 150px;">
+                    {% endif %}
                     <p><strong>Email:</strong> {{ user.email }}</p>
                     <p><strong>Registration Date:</strong> {{ user.date_joined|date:"d M Y" }}</p>
                     <form action="" method="post" enctype="multipart/form-data">
