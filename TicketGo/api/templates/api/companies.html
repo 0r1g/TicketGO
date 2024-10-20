@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ company }}</h5>
                         <p class="card-text">{{ company.official_name }}</p>
-                        <a href="{% url 'show_company_details' company_id=company.id %}" class="btn btn-primary">Детальніше</a>
+                        <a href="{% url 'show_company_details' company_id=company.id %}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         </div>
     {% else %}
         <div class="alert alert-warning text-center" role="alert" style="font-size: 1.2rem;">
-            <i class="bi bi-exclamation-triangle-fill"></i> На жаль немає, жодних автобусних компаній.
+            <i class="bi bi-exclamation-triangle-fill"></i> Unfortunately, there are no bus companies available.
         </div>
     {% endif %}
 </div>

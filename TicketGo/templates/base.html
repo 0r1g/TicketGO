@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,13 +44,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Головна</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'show_companies' %}">Компанії перевізники</a>
+                            <a class="nav-link" href="{% url 'show_companies' %}">Transport Companies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'show_buses' %}">Маршрути</a>
+                            <a class="nav-link" href="{% url 'show_buses' %}">Routes</a>
                         </li>
                     </ul>
 
@@ -59,18 +59,18 @@
                         <li class="nav-item">
                             <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-danger me-2">Вийти</button>
+                                <button type="submit" class="btn btn-outline-danger me-2">Logout</button>
                             </form>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary" href="{% url 'profile' %}">Профіль</a>
+                            <a class="btn btn-outline-primary" href="{% url 'profile' %}">Profile</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Увійти</a>
+                            <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-success" href="{% url 'register' %}">Зареєструватися</a>
+                            <a class="btn btn-outline-success" href="{% url 'register' %}">Register</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -81,13 +81,13 @@
 
     <main class="container">
         {% block content %}
-        <!-- Контент сторінки -->
+        <!-- Page content -->
         {% endblock %}
     </main>
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2024 Мій сайт:
+            © 2024 My Site:
             <a class="text-dark" href="#">mysite.com</a>
         </div>
     </footer>

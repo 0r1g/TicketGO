@@ -14,14 +14,14 @@
                 <div class="card-body text-center">
                     <img src="{{ photo_profile.photo.url }}" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 150px;">
                     <p><strong>Email:</strong> {{ user.email }}</p>
-                    <p><strong>Дата реєстрації:</strong> {{ user.date_joined|date:"d M Y" }}</p>
+                    <p><strong>Registration Date:</strong> {{ user.date_joined|date:"d M Y" }}</p>
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="{{ form.photo.label }}" class="form-label"><strong>Завантажити фото</strong></label>
+                            <label for="{{ form.photo.label }}" class="form-label"><strong>Upload Photo</strong></label>
                             {{ form.photo|add_class:"form-control" }}
                         </div>
-                        <button type="submit" class="btn btn-outline-primary">Відправити</button>
+                        <button type="submit" class="btn btn-outline-primary">Submit</button>
                     </form>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h4>Ваші квитки</h4>
+                    <h4>Your Tickets</h4>
                 </div>
                 {% if tickets %}
                     {% for ticket in tickets %}
@@ -44,7 +44,7 @@
                                         {{ ticket.bus.to_location }}
                                     </h5>
                                     <div class="mt-4">
-                                        <a href="{% url 'view_booking' booking_id=ticket.id %}" class="btn btn-outline-secondary btn-lg">Переглянути замовлення</a>
+                                        <a href="{% url 'view_booking' booking_id=ticket.id %}" class="btn btn-outline-secondary btn-lg">View Booking</a>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                     {% endfor %}
                 {% else %}
                     <div class="card-body text-center">
-                        <h4>Ви не забронували жодного квитка.</h4>
+                        <h4>You have not booked any tickets.</h4>
                     </div>
                 {% endif %}
             </div>

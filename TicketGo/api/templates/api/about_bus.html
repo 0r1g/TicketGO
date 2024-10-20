@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center">Деталі поїздки</h2>
+    <h2 class="text-center">Trip Details</h2>
 
     <div class="card mt-3">
         <div class="card-body">
@@ -18,14 +18,14 @@
             </h5>
 
             <div class=" justify-content-between mt-3">
-                <p class="mb-1"><strong>Виїзд:</strong> <span class="text-success fw-bold">{{ bus.departure_time|date:"H:i A" }}</span></p>
-                <p class="mb-1"><strong>Прибуття:</strong> <span class="text-success fw-bold">{{ bus.arrival_time|date:"H:i A" }}</span></p>
+                <p class="mb-1"><strong>Departure:</strong> <span class="text-success fw-bold">{{ bus.departure_time|date:"H:i A" }}</span></p>
+                <p class="mb-1"><strong>Arrival:</strong> <span class="text-success fw-bold">{{ bus.arrival_time|date:"H:i A" }}</span></p>
             </div>
 
 
             <div class="mt-4">
-                <p><strong>Ціна:</strong> {{ bus.price }} $</p>
-                <p><strong>Перевізник:</strong><a href="{% url 'show_company_details' company_id=bus.company_id %}" class="text-decoration-none text-primary fw-bold"> {{ bus.company }}</a></p>
+                <p><strong>Price:</strong> {{ bus.price }} $</p>
+                <p><strong>Carrier:</strong><a href="{% url 'show_company_details' company_id=bus.company_id %}" class="text-decoration-none text-primary fw-bold"> {{ bus.company }}</a></p>
                 <div class="mt-4">
                     <p>
                         <strong>Wi-Fi:</strong>
@@ -36,7 +36,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        <strong>Розетки:</strong>
+                        <strong>Sockets:</strong>
                         {% if bus.socket_availability == "Yes" %}
                             <span class="text-success" style="font-size: 1.5em;">&#10003;</span>
                         {% else %}
@@ -44,7 +44,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        <strong>Туалет:</strong>
+                        <strong>Toilets:</strong>
                         {% if bus.toilets_available == "Yes" %}
                             <span class="text-success" style="font-size: 1.5em;">&#10003;</span>
                         {% else %}
@@ -52,7 +52,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        <strong>Кондиціонер:</strong>
+                        <strong>Air Conditioning:</strong>
                         {% if bus.conditioner_available == "Yes" %}
                             <span class="text-success" style="font-size: 1.5em;">&#10003;</span>
                         {% else %}
@@ -63,7 +63,7 @@
             </div>
 
             <div class="text-center mt-3">
-                <a href="{% url 'booking_form' bus_id=bus.id %}" class="btn btn-success">Забронювати квиток</a>
+                <a href="{% url 'booking_form' bus_id=bus.id %}" class="btn btn-success">Book a Ticket</a>
             </div>
         </div>
     </div>

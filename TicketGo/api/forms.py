@@ -1,6 +1,5 @@
-# forms.py
 from django import forms
-from .models import Booking, ProfilePhoto
+from .models import Booking
 
 
 class BookingForm(forms.ModelForm):

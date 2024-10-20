@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Деталі Бронювання</h2>
+    <h2 class="text-center mb-4">Booking Details</h2>
     <div class="card">
         <div class="card-body">
-            <p><strong>Користувач:</strong> {{ booking.user.username }}</p>
-            <p><strong>Автобус:</strong> {{ booking.bus.from_location }} --> {{ booking.bus.to_location }}</p>
-            <p><strong>Місце:</strong> {{ booking.seat_choice }}</p>
+            <p><strong>User:</strong> {{ booking.user.username }}</p>
+            <p><strong>Bus:</strong> {{ booking.bus.from_location }} --> {{ booking.bus.to_location }}</p>
+            <p><strong>Seat:</strong> {{ booking.seat_choice }}</p>
             <p><strong>Email:</strong> {{ booking.email }}</p>
-            <p><strong>Номер телефону:</strong> {{ booking.phone_number }}</p>
+            <p><strong>Phone Number:</strong> {{ booking.phone_number }}</p>
         </div>
     </div>
 </div>

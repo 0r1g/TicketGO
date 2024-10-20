@@ -19,11 +19,10 @@
 
                 <div class="col-md-3">
                     {{ form.departure_time|add_class:"form-control" }}
-
                 </div>
 
                 <div class="col-md-1 d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Знайти</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Find</button>
                 </div>
             </div>
         </form>
@@ -44,10 +43,10 @@
                         {{ bus.price }} $
                     </p>
                     <p class="card-text" style="font-family: 'Arial', sans-serif; font-size: 1.1rem; color: #343a40;">
-                    Рейс з <strong style="font-weight: bold; color: #007bff;">{{ bus.departure_time|date:"H:i A" }}</strong> до <strong style="font-weight: bold; color: #007bff;">{{ bus.arrival_time|date:"H:i A" }}</strong>
+                    Trip from <strong style="font-weight: bold; color: #007bff;">{{ bus.departure_time|date:"H:i A" }}</strong> to <strong style="font-weight: bold; color: #007bff;">{{ bus.arrival_time|date:"H:i A" }}</strong>
                     </p>
-                    <p class="card-text"><strong>Перевізник:</strong> <a href="{% url 'show_company_details' company_id=bus.company_id %}" style="color: #007bff; text-decoration: none;">{{ bus.company_name }}</a></p>
-                    <a href="{% url 'show_buses' bus_id=bus.id %}" class="btn btn-primary">Детальніше</a>
+                    <p class="card-text"><strong>Company:</strong> <a href="{% url 'show_company_details' company_id=bus.company_id %}" style="color: #007bff; text-decoration: none;">{{ bus.company_name }}</a></p>
+                    <a href="{% url 'show_buses' bus_id=bus.id %}" class="btn btn-primary">Details</a>
                 </div>
             </div>
         </div>
@@ -79,11 +78,10 @@
         </nav>
     {% else %}
         <div class="alert alert-warning text-center" role="alert" style="font-size: 1.2rem;">
-            <i class="bi bi-exclamation-triangle-fill"></i> Не знайдено автобусів за вашим запитом.
-            <br> Будь ласка, спробуйте змінити параметри пошуку.
+            <i class="bi bi-exclamation-triangle-fill"></i> No buses found for your request.
+            <br> Please try changing the search parameters.
         </div>
     {% endif %}
-
 
 </div>
 {% endblock %}

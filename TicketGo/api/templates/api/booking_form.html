@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h2 class="text-center mb-4">Бронювання для автобуса: {{ bus.from_location }} -> {{ bus.to_location }}</h2>
+                    <h2 class="text-center mb-4">Booking for the Bus: {{ bus.from_location }} -> {{ bus.to_location }}</h2>
 
                     <form method="POST">
                         {% csrf_token %}
@@ -28,7 +28,7 @@
                         {% endfor %}
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg">Забронювати</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Book</button>
                         </div>
                     </form>
                 </div>
