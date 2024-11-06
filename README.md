@@ -1,5 +1,6 @@
 # TicketGO
 TicketGO is a web-based platform that allows users to search for, book, and manage bus reservations. Built using Django, the system offers a streamlined and user-friendly experience for booking intercity bus trips.
+![Uploading image.png…]()
 
 ## Features
 - **Bus Search**: Users can search for available buses based on departure location, destination, and travel date.
